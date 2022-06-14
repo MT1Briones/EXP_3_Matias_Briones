@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <link href="{% static 'css/estilos.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/funciones.js' %}"></script>
+      <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>JARDINERIA</title>
+
+  <script>
+      $(function() 
+      {
+        $("#mi-formulario").validate({
+             rules: {
+                      nombre:{
+                        required: true,
+                        minlength: 15
+                      },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: "required",
+                    fono: "required",
+                    password2: {
+                        required: true,
+                        equalTo: "#password"
+                    }   
+                    
+                }, //rules
+            messages: {
+                nombre: {
+                    required:'Ingrese su nombre y 2 apellidos',
+                    nombre:'Formato de nombre no valido'
+                },
+                email: {
+                    required: 'Ingresa tu correo electrónico',
+                    email: 'Formato de correo no válido'
+                },
+                password: {
+                    required: 'Ingresa una contraseña',
+                    minlength: 'Caracteres insuficientes'
+                },
+                fono:{
+                    required: 'Ingrese un número de celular',
+                    minlength: 'Cantidad de digitos insuficiente'
+                },
+                fecha:{
+                    required: 'Seleccione una fecha válida',
+                    min: 'Fecha no corresponde'
+                },
+                password2: {
+                    required: 'Reingresa la contraseña',
+                    equalTo: 'Las contraseñas ingresadas no coinciden',
+                    minlength: 'Caracteres insuficientes'
+
+                }
+            }//messages
+        }); //$('#mi-formulario').validate
+    }); //function
+    
+    function CambiaColor(a)
+        {
+            a.style.background = "lightgreen";
+        }
+        function MostrarFecha() 
+    {   document.getElementById('demo').innerHTML = Date();
+     
+    }
+    function startTime() {
+    var today = new Date();
+    var hr = today.getHours();
+    var min = today.getMinutes();
+    var sec = today.getSeconds();
+    min = checkTime(min);
+    sec = checkTime(sec);
+    document.getElementById("clock").innerHTML = hr + " : " + min + " : " + sec;
+    var time = setTimeout(function(){ startTime() }, 500);
+}
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+  </script>
+   
+</head>
+{% load static %}
+<body class="fondo" onload="startTime()">
+  <div id="clockdate">
+    <div class="clockdate-wrapper">
+      <div id="clock"></div>
+      <div id="date"></div>
+    </div>
+    </div>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'img/menuimg.jpg' %}" width="50" height="50" alt="">
+          </a>
+
+          <div class="collapse navbar-collapse" id="opciones">   
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'quienes' %}">Quienes Somos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'galeria' %}">Galeria de fotos</a>
+              </li>    
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'FORMULARIO1' %}">Crear Cuenta</a>
+              </li>       
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'Contacto' %}">Contacto</a>
+              </li>  
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'api' %}">Conoce nuestros empleados</a>
+              </li> 
+              <br>
+              <li>
+                <input type="button" class="btn btn-primary" onclick="MostrarFecha()" value="La fecha es?">
+                <p id="demo"></p>
+              </li>
+              <br>
+              {% if user.is_authenticated %}
+              <li>
+                <a href="{% url 'mostrar' %}">Mostrar Productos</a>
+              </li>
+                <br>
+                <li>
+                  <a href="{% url 'mostrar2' %}">Mostrar Clientes</a>
+                </li>
+                <br>
+                <li>
+                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+              </li>
+                <br>
+                <li>
+                <a href="#">Bienvenid@ {{user.username}}</a>
+              </li>
+              {% else %}
+              <li>
+                <a href="{% url 'login' %}">Iniciar Sesión</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+    <hr>
+  <div class="container">
+    <h1 class="titulo1">Envianos Tu Mensaje</h1>
+    <form id="mi-formulario" action="{% url 'inicio' %}" method="post">
+        <label>Correo Electrónico: </label>
+        <input type="text" class="form-control" name="email" required onfocus="CambiaColor(this)" >
+        <br>
+        <label>Telefono: </label>
+        <input type="number" class="form-control" name="fono" minlength="9" required onfocus="CambiaColor(this)">
+        <br>
+        <label for="comentarios">Escribe aqui tu mensaje</label>
+        <textarea class="form-control" rows="5" id="comentarios" name="comentarios" required onfocus="CambiaColor(this)"></textarea>
+        <button>Enviar</button>
+      </form>
+    </div>
+    <br>
+    <div class="container my-5">
+      <footer
+              class="text-center text-lg-start text-white"
+              style="background-color: lightgreen"
+              >
+        
+        <div class="container p-4 pb-0">
+          
+          <section class="">
+            
+            <div class="row">
+              
+              <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">
+                  VECINOS VERDES
+                  <p>
+                    <img src="{% static 'img/menuimg.jpg' %}" width="100" height="100" alt=""></p>
+                </h6>
+              </div>
+              <hr class="w-100 clearfix d-md-none" />
+    
+              
+              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">CATALOGO</h6>
+                <p>
+                  <a class="text-white">Maceteros</a>
+                </p>
+                <p>
+                  <a class="text-white">Plantas</a>
+                </p>
+                <p>
+                  <a class="text-white">Tierra</a>
+                </p>
+              </div>
+
+              <hr class="w-100 clearfix d-md-none" />
+              <hr class="w-100 clearfix d-md-none" />
+    
+              
+              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Contactos</h6>
+                <p><i class="fas fa-home mr-3"></i> La pinta #2234</p>
+                <p><i class="fas fa-envelope mr-3"></i> vecinos.verdes@gmail.com</p>
+                <p><i class="fas fa-phone mr-3"></i> +569 8191 3391</p>
+              </div>
+              
+    
+               <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Siguenos</h6>
+                <a
+                   href="#!"
+                   role="button">
+                   <img src="{% static 'img/facebook.png' %}" width="50" height="50" alt="">
+                  </a>
+                <a
+
+                   href="#!"
+                   role="button">
+                   <img src="{% static 'img/twitter.png' %}" width="50" height="50" alt="">
+                  </a>
+                <a
+                   href="#!"
+                   role="button">
+                   <img src="{% static 'img/instagram.png' %}" width="50" height="50" alt="">
+                   </a>
+              </div>
+            </div>
+          </section> 
+        </div>
+        <section class="p-3 pt-0">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-7 col-lg-8 text-center text-md-start">
+            
+              <div class="p-3">
+                Matias Briones © 2020 Copyright:
+                   >VecinosVerdes.com</a>
+              </div>
+      </footer>
+    </div> 
+</body>
+</html>%

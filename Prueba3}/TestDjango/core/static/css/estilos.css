@@ -1,0 +1,46 @@
+.titulo1{
+            text-align: center;
+            color: darkgreen;
+
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: lightgreen;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+  }
+  .fondofot{
+
+    background-color: lightgreen;
+  }
+
+.boton{
+
+    text-align: right;
+}
+
+
+
+.fondo{
+    background-color:bisque;
+} 
+
+.color{
+    color: white;
+}
+
+
+#caja{
+    width: 300px;
+    border: 15px solid green;
+    padding: 20px;
+    margin: 20px;
+}
+
